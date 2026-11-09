@@ -46,3 +46,13 @@ button{
     padding: 10px;
     border-radius: 5px;
 }
+
+.btn-remover{
+    color: red;
+    animation: ease 0.3s ;
+    /* border: solid; */
+}
+.btn-remover:hover{
+    cursor: pointer;
+    transform: translateY(70px)
+}

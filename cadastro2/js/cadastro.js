@@ -49,14 +49,14 @@ function mostrarLista() {
         let item = document.createElement('li');
         item.innerHTML = `
             <strong>${aluno.matricula}</strong> - ${aluno.nome}
-            <span onclick="removerAluno(${i})" class="btn-remover">rem</span>
+            <span onclick="removerAluno(${i})" class="btn-remover"> <strong>   X</strong></span>
         `;
         lista.appendChild(item);
     }
 }
 
 function removerAluno(indice) {
-    if (confirm('Remover este aluno?')) {
+    if (confirm('Deseja remover este aluno?')) {
         alunos.splice(indice, 1);  // Remove 1 item na posição 'indice'
         mostrarLista();
         atualizarTotal();
