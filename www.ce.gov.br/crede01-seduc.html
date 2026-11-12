@@ -1,0 +1,511 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal de Gestão Educacional</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f7f8fa;
+    color: #263445;
+}
+
+header {
+    height: 76px;
+    background: linear-gradient(105deg,#008675,#13a34a);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    position: relative;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    width: 43px;
+    height: 43px;
+    border: 2px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.brand h1 {
+    font-size: 25px;
+}
+
+.header-search {
+    width: 340px;
+    background: white;
+    color: #777;
+    border-radius: 30px;
+    padding: 12px 18px;
+    font-size: 13px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-weight: bold;
+}
+
+.access-button {
+    padding: 10px 30px;
+    border: 1px solid white;
+    border-radius: 7px;
+}
+
+.layout {
+    display: flex;
+    min-height: calc(100vh - 76px);
+}
+
+.sidebar {
+    width: 202px;
+    background: #008574;
+    color: white;
+    flex-shrink: 0;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 17px 18px;
+    font-size: 13px;
+    font-weight: bold;
+    transition: .2s;
+}
+
+.sidebar a:hover {
+    background: #006e60;
+}
+
+.sidebar .separator {
+    height: 35px;
+}
+
+.content {
+    flex: 1;
+    min-width: 0;
+}
+
+.navbar {
+    height: 48px;
+    background: #00695c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+main {
+    max-width: 1100px;
+    padding: 30px 38px;
+    margin: auto;
+}
+
+.breadcrumb {
+    font-size: 12px;
+    color: #687789;
+    margin-bottom: 22px;
+}
+
+h2 {
+    font-size: 25px;
+    color: #263445;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #718096;
+    margin-bottom: 25px;
+}
+
+.document {
+    background: white;
+    border: 1px solid #e4e8ed;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 2px 7px #00000008;
+}
+
+.document h3 {
+    color: #176c60;
+    font-size: 18px;
+    margin-bottom: 18px;
+}
+
+.document p {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.info {
+    background: #edf5f7;
+    border-left: 4px solid #008b78;
+    padding: 18px;
+    margin: 23px 0;
+}
+
+.info strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #155c53;
+}
+
+.section-title {
+    font-size: 19px;
+    color: #263445;
+    margin: 28px 0 18px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.field label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.field input,
+.field select {
+    width: 100%;
+    height: 43px;
+    border: 1px solid #cbd5df;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 13px;
+    background: white;
+}
+
+.button {
+    margin-top: 25px;
+    background: #087c6e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 14px 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #056456;
+}
+
+#result {
+    display: none;
+    background: #eaf5ed;
+    border: 1px solid #a5d3b2;
+    padding: 20px;
+    margin-top: 25px;
+    border-radius: 5px;
+}
+
+footer {
+    padding: 25px;
+    text-align: center;
+    color: #7b8794;
+    font-size: 12px;
+}
+
+@media(max-width:850px) {
+    header {
+        padding: 15px;
+    }
+
+    .header-search,
+    .header-actions {
+        display: none;
+    }
+
+    .sidebar {
+        width: 65px;
+    }
+
+    .sidebar a {
+        font-size: 0;
+        text-align: center;
+        padding: 20px 5px;
+    }
+
+    .navbar {
+        gap: 12px;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 0 12px;
+    }
+
+    .navbar a {
+        font-size: 11px;
+        white-space: nowrap;
+    }
+
+    main {
+        padding: 20px 14px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="brand">
+        <div class="brand-icon">GE</div>
+        <div>
+            <h1>GESTÃO EDUCACIONAL</h1>
+            <small>Portal demonstrativo de serviços</small>
+        </div>
+    </div>
+
+    <div class="header-search">
+        ⚲ &nbsp; O que você precisa?
+    </div>
+
+    <div class="header-actions">
+        <span>A−</span>
+        <span>A+</span>
+        <span>◐</span>
+        <span class="access-button">Acessar</span>
+    </div>
+</header>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <a href="#">☰ &nbsp; Menu</a>
+        <a href="#">⌂ &nbsp; Página inicial</a>
+        <a href="#">▦ &nbsp; Serviços</a>
+        <a href="#">ⓘ &nbsp; Informações</a>
+
+        <div class="separator"></div>
+
+        <a href="#">▤ &nbsp; Gestão escolar</a>
+        <a href="#">♙ &nbsp; Gestão de pessoas</a>
+        <a href="#">▣ &nbsp; Cadastro docente</a>
+        <a href="#">◉ &nbsp; Atendimento</a>
+        <a href="#">▥ &nbsp; Relatórios</a>
+    </aside>
+
+    <div class="content">
+
+        <nav class="navbar">
+            <a href="#">Início</a>
+            <a href="#">Serviços</a>
+            <a href="#">Institucional⌄</a>
+            <a href="#">Rede Escolar⌄</a>
+            <a href="#">Gestão⌄</a>
+            <a href="#">Informações⌄</a>
+        </nav>
+
+        <main>
+
+            <div class="breadcrumb">
+                Início / Gestão / Cadastro Docente
+            </div>
+
+            <h2>Atualização Cadastral Docente</h2>
+
+            <div class="subtitle">
+                Departamento de Gestão de Informações Educacionais
+            </div>
+
+            <section class="document">
+
+                <h3>Comunicado Administrativo</h3>
+
+                <p>
+                    Prezados profissionais da educação,
+                </p>
+
+                <p>
+                    O Departamento de Gestão de Informações
+                    Educacionais apresenta este procedimento
+                    demonstrativo de conferência e atualização
+                    de registros funcionais docentes.
+                </p>
+
+                <p>
+                    Em sistemas de gestão de informações,
+                    procedimentos de manutenção e atualização
+                    de bases de dados podem exigir a verificação
+                    da integridade dos registros anteriormente
+                    cadastrados.
+                </p>
+
+                <div class="info">
+                    <strong>Orientação administrativa</strong>
+                    <p>
+                        Este ambiente apresenta um cenário
+                        hipotético de atualização cadastral,
+                        destinado à análise acadêmica de
+                        procedimentos de segurança da informação.
+                    </p>
+                </div>
+
+                <p>
+                    A atividade permite observar os procedimentos
+                    de conferência de informações funcionais,
+                    bem como os cuidados necessários antes
+                    do fornecimento de informações em plataformas
+                    digitais.
+                </p>
+
+                <h3 class="section-title">
+                    Conferência de Informações Funcionais
+                </h3>
+
+                <p>
+                    Utilize apenas informações fictícias
+                    para preencher os campos demonstrativos.
+                </p>
+
+                <form id="formulario">
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label>Nome do profissional</label>
+                            <input
+                                type="text"
+                                placeholder="Professor Exemplo"
+                                required>
+                        </div>
+
+                        <div class="field">
+                            <label>Unidade de ensino</label>
+                            <input
+                                type="text"
+                                placeholder="Escola Demonstrativa"
+                                required>
+                        </div>
+
+                        <div class="field">
+                            <label>Área de atuação</label>
+                            <select required>
+                                <option value="">Selecione</option>
+                                <option>Desenvolvimento de Sistemas</option>
+                                <option>Informática</option>
+                                <option>Administração</option>
+                                <option>Outro</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Vínculo funcional</label>
+                            <select required>
+                                <option value="">Selecione</option>
+                                <option>Docente</option>
+                                <option>Coordenação</option>
+                                <option>Gestão escolar</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>E-mail demonstrativo</label>
+                            <input
+                                type="email"
+                                placeholder="exemplo@teste.com"
+                                required>
+                        </div>
+
+                        <div class="field">
+                            <label>Situação cadastral</label>
+                            <select required>
+                                <option value="">Selecione</option>
+                                <option>Informações atualizadas</option>
+                                <option>Necessita de conferência</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <button class="button" type="submit">
+                        Concluir conferência cadastral
+                    </button>
+
+                </form>
+
+                <div id="result">
+                    <h3>Procedimento demonstrativo concluído</h3>
+                    <p>
+                        Esta atividade integra uma demonstração
+                        acadêmica sobre engenharia social,
+                        phishing e verificação da autenticidade
+                        de solicitações administrativas.
+                    </p>
+                    <p>
+                        Nenhuma informação foi transmitida
+                        ou armazenada.
+                    </p>
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer>
+            Portal demonstrativo de gestão educacional.
+            <br>
+            Ambiente acadêmico fictício.
+        </footer>
+
+    </div>
+</div>
+
+<script>
+document.getElementById("formulario")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    document.getElementById("result").style.display = "block";
+
+    document.getElementById("result")
+        .scrollIntoView({behavior: "smooth"});
+
+});
+</script>
+
+</body>
+</html>
